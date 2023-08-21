@@ -38,17 +38,32 @@ resource "aws_instance" "komiser" {
     destination = "/home/ec2-user/config.toml"
   }
 
- 
+
   provisioner "file" {
     source      = "scripts/install.sh"
     destination = "/tmp/install.sh"
   }
 
- provisioner "file" {
+  provisioner "file" {
+    source      = "scripts/.htpasswd"
+    destination = "/home/ec2-user/.htpasswd"
+  }
+
+  provisioner "file" {
     source      = "scripts/docker-compose.yml"
     destination = "/home/ec2-user/docker-compose.yml"
 
   }
+
+  provisioner "file" {
+    source      = "scripts/nginx.conf"
+    destination = "/home/ec2-user/nginx.conf"
+  }
+
+  # provisioner "remote-exec" {
+  #   inline = ["bash /tmp/htpasswd.sh"]
+
+  # }
 
   provisioner "remote-exec" {
     inline = ["bash /tmp/install.sh"]
@@ -72,10 +87,10 @@ resource "aws_security_group" "komiser_sg" {
   }
 
   ingress {
-    from_port = "0"
-    to_port   = "0"
-    protocol  = "-1"
-        cidr_blocks = ["0.0.0.0/0"] // restrict with your CIDR or use a bastion host
+    from_port   = "0"
+    to_port     = "0"
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"] // restrict with your CIDR or use a bastion host
 
   }
 

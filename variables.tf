@@ -22,27 +22,17 @@ variable "owner" {
   default     = "jason"
 }
 
-# variable "private_key_path" {
-#   type        = string
-#   description = "Path to AWS key pair"
-# }
 
-# variable "ssl_arn" {
-#   type        = string
-#   description = "ACM certificate ARN"
-# }
+variable "subdomain" {
+  type = string
+  description = "subdomain name"
+  default = "komiser.quickcloudsetup.com"
+  
+}
 
-# variable "subnets" {
-#   type        = list(any)
-#   description = "Subnets IDs where Komiser will be deployed"
-# }
-
-# variable "domain_name" {
-#   type        = string
-#   description = "Route53 domain name"
-# }
-
-# variable "hosted_zone_id" {
-#   type        = string
-#   description = "Route53 zone ID"
-# }
+variable "zone_id" {
+  type = string
+  description = "Hosted Zone ID"
+  default = "Z00619834POAGICFNWEM"
+  
+}
